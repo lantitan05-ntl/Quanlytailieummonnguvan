@@ -182,7 +182,7 @@
                         <td>1</td>
                         <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Phân tích bài thơ Bếp lửa (Bằng Việt)</strong></td>
                         <td>Lớp 8</td>
-                        <td><span class="badge badge-vanmau">Vavan Mẫu</span></td>
+                        <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
                         <td>04/06/2026</td>
                         <td class="action-links">
                             <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
@@ -285,7 +285,7 @@
         </div>
 
         <div id="editNoiDungContainer" style="display: none;">
-            <textarea id="editNoiDungInput" rows="10" style="width: 100%; line-height: 1.6; padding: 10px; font-size: 14px; resize: vertical; outline: none; border-color: #2a5298("></textarea>
+            <textarea id="editNoiDungInput" rows="10" style="width: 100%; line-height: 1.6; padding: 10px; font-size: 14px; resize: vertical; outline: none; border-color: #2a5298;"></textarea>
         </div>
 
         <div class="form-actions" style="margin-top: 20px; justify-content: space-between;">
@@ -350,8 +350,8 @@
 </div>
 
 <script>
-    // MÃ PIN bảo mật mặc định (Muốn đổi phải vào sửa trực tiếp ở đây)
-    const ADMIN_SECURITY_PIN = "1234"; 
+    // MÃ PIN bảo mật mặc định (Đã được cập nhật thành admin1234)
+    const ADMIN_SECURITY_PIN = "admin1234"; 
 
     const khoNoiDung = {
         "Phân tích bài thơ Bếp lửa (Bằng Việt)": "Bài thơ 'Bếp lửa' của Bằng Việt đã gợi lại những kỷ niệm đầy xúc động về tình bà cháu...",
@@ -376,7 +376,7 @@
         if(quyen === 'admin') {
             // Nếu đang là User và muốn lên Admin, bắt buộc hỏi mã PIN
             if(body.className !== 'role-admin') {
-                let nhapPin = prompt("Vui lòng nhập Mã PIN xác thực quyền Admin (Mã mặc định là 1234):");
+                let nhapPin = prompt("Vui lòng nhập Mã PIN xác thực quyền Admin :");
                 if (nhapPin === ADMIN_SECURITY_PIN) {
                     body.className = 'role-admin';
                     alert("Mã PIN chính xác! Đã chuyển sang giao diện ADMIN (Có toàn quyền quản trị).");
@@ -448,7 +448,7 @@
     }
 
 
-    // --- CÁC HÀM XỬ LÝ TÀI LIỆU (Giữ nguyên logic ứng dụng cũ của bạn) ---
+    // --- CÁC HÀM XỬ LÝ TÀI LIỆU ---
     function xemChiTietKhiBamTen(cell) {
         dangXemTieuDeKey = cell.innerText.trim();
         let row = cell.parentElement;

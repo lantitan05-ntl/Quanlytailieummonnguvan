@@ -12,9 +12,8 @@
         body { background-color: #f4f6f9; color: #333; padding: 20px; }
         .container { max-width: 1200px; margin: 0 auto; }
 
-        /* Khối Header giữ nguyên độ bo góc từ ảnh thực tế của bạn */
         header {
-            position: relative; /* Tạo điểm neo để định vị nút ba gạch tuyệt đối */
+            position: relative;
             text-align: center; margin-bottom: 30px; padding: 20px;
             background: linear-gradient(135deg, #1e3c72, #2a5298); color: white;
             border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -22,76 +21,37 @@
         header h1 { font-size: 28px; margin-bottom: 5px; }
         header p { font-size: 14px; opacity: 0.9; }
 
-        /* --- CẤU TRÚC NÚT BA GẠCH Ở GÓC TRÊN BÊN PHẢI --- */
+        /* --- BURGER MENU --- */
         .menu-burger-container {
             position: absolute;
-            top: 20px;
-            right: 25px;
-            z-index: 99;
+            top: 20px; right: 25px; z-index: 99;
         }
-
         .burger-icon {
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            border: none;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            font-size: 18px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: rgba(255, 255, 255, 0.15); color: white; border: none;
+            width: 42px; height: 42px; border-radius: 50%; font-size: 18px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
             transition: all 0.2s ease;
         }
+        .burger-icon:hover { background: rgba(255, 255, 255, 0.3); transform: scale(1.05); }
 
-        .burger-icon:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: scale(1.05);
-        }
-
-        /* Menu thả xuống khi bấm vào nút ba gạch */
         .burger-dropdown {
-            position: absolute;
-            top: 50px;
-            right: 0;
-            background: white;
-            min-width: 180px;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            padding: 8px 0;
-            display: none; /* Ẩn mặc định, bật bằng JS */
-            flex-direction: column;
-            text-align: left;
+            position: absolute; top: 50px; right: 0; background: white;
+            min-width: 180px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 8px 0; display: none; flex-direction: column; text-align: left;
         }
-
         .burger-dropdown a {
-            color: #333;
-            text-decoration: none;
-            padding: 10px 16px;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background 0.2s;
+            color: #333; text-decoration: none; padding: 10px 16px; font-size: 14px;
+            display: flex; align-items: center; gap: 10px; transition: background 0.2s;
         }
+        .burger-dropdown a:hover { background-color: #f1f5f9; }
+        .burger-dropdown .divider { height: 1px; background-color: #e2e8f0; margin: 6px 0; }
 
-        .burger-dropdown a:hover {
-            background-color: #f1f5f9;
-        }
+        /* --- PHÂN QUYỀN --- */
+        body.role-user .admin-only { display: none !important; }
 
-        .burger-dropdown .divider {
-            height: 1px;
-            background-color: #e2e8f0;
-            margin: 6px 0;
-        }
+        /* Khối quản lý User ẩn mặc định cho đến khi bấm nút tab */
+        #userManagementSection { display: none; }
 
-        /* --- PHÂN QUYỀN: ẨN CÁC THÀNH PHẦN CHỈ ĐỊNH CỦA ADMIN --- */
-        body.role-user .admin-only {
-            display: none !important;
-        }
-
-        /* Cấu trúc các nút bấm lọc lớp */
         .class-filter { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; }
         .class-btn {
             padding: 10px 20px; background-color: white; color: #2a5298;
@@ -113,8 +73,10 @@
         
         .btn-add { background-color: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .btn-add:hover { background-color: #219653; }
+        .btn-nav-users { background-color: #8e44ad; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: 10px;}
+        .btn-nav-users:hover { background-color: #7d3c98; }
 
-        .table-container { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .table-container { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; }
         table { width: 100%; border-collapse: collapse; text-align: left; }
         th, td { padding: 15px 20px; border-bottom: 1px solid #eeeeee; }
         th { background-color: #f8f9fa; color: #555; font-weight: 500; text-transform: uppercase; font-size: 13px; }
@@ -122,7 +84,6 @@
 
         .ten-tl { cursor: pointer; transition: color 0.2s ease; }
         .ten-tl:hover { color: #2a5298; text-decoration: underline; }
-
         tr.hidden { display: none; }
 
         .badge { padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; }
@@ -136,6 +97,7 @@
         .btn-delete { color: #e74c3c; }
         .btn-delete:hover { text-decoration: underline; }
 
+        /* Modals */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center;
@@ -170,6 +132,9 @@
                 <a href="javascript:void(0)" onclick="doiQuyen('admin')"><i class="fa-solid fa-user-shield"></i> Quyền Admin</a>
                 <a href="javascript:void(0)" onclick="doiQuyen('user')"><i class="fa-solid fa-user"></i> Quyền Người dùng</a>
                 <div class="divider"></div>
+                <a href="javascript:void(0)" onclick="switchTab('document')"><i class="fa-solid fa-file-lines"></i> Kho Tài Liệu</a>
+                <a href="javascript:void(0)" onclick="switchTab('user-mgr')" class="admin-only"><i class="fa-solid fa-users-gear"></i> Quản Lý User</a>
+                <div class="divider"></div>
                 <a href="javascript:void(0)" onclick="alert('Hệ thống học liệu Ngữ Văn v1.0')"><i class="fa-solid fa-info-circle"></i> Giới thiệu</a>
             </div>
         </div>
@@ -178,87 +143,132 @@
         <p>Quản lý bài soạn, văn mẫu, đề thi từ lớp 6 đến lớp 12</p>
     </header>
 
-    <div class="class-filter">
-        <button class="class-btn active" onclick="locTheoLop('all')">Tất Cả</button>
-        <button class="class-btn" onclick="locTheoLop('6')">Lớp 6</button>
-        <button class="class-btn" onclick="locTheoLop('7')">Lớp 7</button>
-        <button class="class-btn" onclick="locTheoLop('8')">Lớp 8</button>
-        <button class="class-btn" onclick="locTheoLop('9')">Lớp 9</button>
-        <button class="class-btn" onclick="locTheoLop('10')">Lớp 10</button>
-        <button class="class-btn" onclick="locTheoLop('11')">Lớp 11</button>
-        <button class="class-btn" onclick="locTheoLop('12')">Lớp 12</button>
-    </div>
-
-    <div class="toolbar">
-        <div class="search-box">
-            <input type="text" id="searchInput" onkeyup="timKiemTaiLieu()" placeholder="Tìm kiếm tên tác phẩm, tài liệu...">
+    <div id="documentSection">
+        <div class="class-filter">
+            <button class="class-btn active" onclick="locTheoLop('all')">Tất Cả</button>
+            <button class="class-btn" onclick="locTheoLop('6')">Lớp 6</button>
+            <button class="class-btn" onclick="locTheoLop('7')">Lớp 7</button>
+            <button class="class-btn" onclick="locTheoLop('8')">Lớp 8</button>
+            <button class="class-btn" onclick="locTheoLop('9')">Lớp 9</button>
+            <button class="class-btn" onclick="locTheoLop('10')">Lớp 10</button>
+            <button class="class-btn" onclick="locTheoLop('11')">Lớp 11</button>
+            <button class="class-btn" onclick="locTheoLop('12')">Lớp 12</button>
         </div>
-        <button class="btn-add admin-only" onclick="moModalThem()">+ Thêm Tài Liệu Mới</button>
+
+        <div class="toolbar">
+            <div class="search-box">
+                <input type="text" id="searchInput" onkeyup="timKiemTaiLieu()" placeholder="Tìm kiếm tên tác phẩm, tài liệu...">
+            </div>
+            <div>
+                <button class="btn-add admin-only" onclick="moModalThem()">+ Thêm Tài Liệu Mới</button>
+                <button class="btn-nav-users admin-only" onclick="switchTab('user-mgr')"><i class="fa-solid fa-users"></i> Quản Lý Người Dùng</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table id="taiLieuTable">
+                <thead>
+                    <tr>
+                        <th style="width: 8%">STT</th>
+                        <th style="width: 40%">Tên Tài Liệu / Tác Phẩm</th>
+                        <th style="width: 12%">Khối Lớp</th>
+                        <th style="width: 15%">Phân Loại</th>
+                        <th style="width: 15%">Ngày Cập Nhật</th>
+                        <th style="width: 10%">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-lop="8">
+                        <td>1</td>
+                        <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Phân tích bài thơ Bếp lửa (Bằng Việt)</strong></td>
+                        <td>Lớp 8</td>
+                        <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
+                        <td>04/06/2026</td>
+                        <td class="action-links">
+                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
+                        </td>
+                    </tr>
+                    <tr data-lop="8">
+                        <td>2</td>
+                        <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Soạn bài: Thương vợ (Trần Tế Xương)</strong></td>
+                        <td>Lớp 8</td>
+                        <td><span class="badge badge-soanvan">Soạn Văn</span></td>
+                        <td>03/06/2026</td>
+                        <td class="action-links">
+                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
+                        </td>
+                    </tr>
+                    <tr data-lop="9">
+                        <td>3</td>
+                        <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Phân tích nghệ thuật luận điểm trong Lặng lẽ Sa Pa</strong></td>
+                        <td>Lớp 9</td>
+                        <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
+                        <td>01/06/2026</td>
+                        <td class="action-links">
+                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
+                        </td>
+                    </tr>
+                    <tr data-lop="12">
+                        <td>4</td>
+                        <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Đề thi thử THPT Quốc Gia môn Ngữ Văn 2026</strong></td>
+                        <td>Lớp 12</td>
+                        <td><span class="badge badge-dethi">Đề Thi</span></td>
+                        <td>28/05/2026</td>
+                        <td class="action-links">
+                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="table-container">
-        <table id="taiLieuTable">
-            <thead>
-                <tr>
-                    <th style="width: 8%">STT</th>
-                    <th style="width: 40%">Tên Tài Liệu / Tác Phẩm</th>
-                    <th style="width: 12%">Khối Lớp</th>
-                    <th style="width: 15%">Phân Loại</th>
-                    <th style="width: 15%">Ngày Cập Nhật</th>
-                    <th style="width: 10%">Hành Động</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr data-lop="8">
-                    <td>1</td>
-                    <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Phân tích bài thơ Bếp lửa (Bằng Việt)</strong></td>
-                    <td>Lớp 8</td>
-                    <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
-                    <td>04/06/2026</td>
-                    <td class="action-links">
-                        <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                        <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
-                        <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
-                    </td>
-                </tr>
-                <tr data-lop="8">
-                    <td>2</td>
-                    <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Soạn bài: Thương vợ (Trần Tế Xương)</strong></td>
-                    <td>Lớp 8</td>
-                    <td><span class="badge badge-soanvan">Soạn Văn</span></td>
-                    <td>03/06/2026</td>
-                    <td class="action-links">
-                        <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                        <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
-                        <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
-                    </td>
-                </tr>
-                <tr data-lop="9">
-                    <td>3</td>
-                    <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Phân tích nghệ thuật luận điểm trong Lặng lẽ Sa Pa</strong></td>
-                    <td>Lớp 9</td>
-                    <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
-                    <td>01/06/2026</td>
-                    <td class="action-links">
-                        <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                        <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
-                        <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
-                    </td>
-                </tr>
-                <tr data-lop="12">
-                    <td>4</td>
-                    <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>Đề thi thử THPT Quốc Gia môn Ngữ Văn 2026</strong></td>
-                    <td>Lớp 12</td>
-                    <td><span class="badge badge-dethi">Đề Thi</span></td>
-                    <td>28/05/2026</td>
-                    <td class="action-links">
-                        <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                        <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
-                        <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div id="userManagementSection" class="admin-only">
+        <div class="toolbar" style="background: #edf2f7; border-left: 5px solid #8e44ad;">
+            <h2><i class="fa-solid fa-users-gear"></i> Danh Sách Thành Viên & Người Dùng Hệ Thống</h2>
+            <button class="btn-add" style="background-color: #8e44ad;" onclick="moModalUser()">+ Cấp Tài Khoản Mới</button>
+        </div>
+        
+        <div class="table-container">
+            <table id="userTable">
+                <thead>
+                    <tr>
+                        <th style="width: 10%">STT</th>
+                        <th style="width: 35%">Họ và Tên User</th>
+                        <th style="width: 25%">Email đăng ký</th>
+                        <th style="width: 15%">Chức Vụ</th>
+                        <th style="width: 15%">Hành Động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><strong>Nguyễn Văn Trưởng Khoa</strong></td>
+                        <td>truongkhoavan@school.edu.vn</td>
+                        <td><span class="badge" style="background-color: #fed7d7; color: #c53030;">Quản trị viên</span></td>
+                        <td class="action-links"><span style="color:#aaa; font-size:12px;">Mặc định</span></td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Trần Thị Học Sinh</td>
+                        <td>student.tran@gmail.com</td>
+                        <td><span class="badge" style="background-color: #e2e8f0; color: #4a5568;">Người Dùng</span></td>
+                        <td class="action-links">
+                            <a class="btn-delete" onclick="xoaUser(this)">Xóa User</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button class="class-btn" onclick="switchTab('document')">&larr; Quay lại Kho Tài Liệu</button>
     </div>
 </div>
 
@@ -321,43 +331,124 @@
     </div>
 </div>
 
+<div class="modal-overlay" id="userModal">
+    <div class="modal-box">
+        <h2>Cấp Tài Khoản Mới</h2>
+        <div class="form-group">
+            <label>Họ và tên người dùng:</label>
+            <input type="text" id="userFormName" placeholder="Nhập tên học sinh/giáo viên...">
+        </div>
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" id="userFormEmail" placeholder="name@example.com">
+        </div>
+        <div class="form-actions">
+            <button class="btn-cancel" onclick="toggleUserModal(false)">Hủy</button>
+            <button class="btn-save" style="background-color: #8e44ad;" onclick="luuUserMoi()">Cấp tài khoản</button>
+        </div>
+    </div>
+</div>
+
 <script>
+    // MÃ PIN bảo mật mặc định (Muốn đổi phải vào sửa trực tiếp ở đây)
+    const ADMIN_SECURITY_PIN = "1234"; 
+
     const khoNoiDung = {
-        "Phân tích bài thơ Bếp lửa (Bằng Việt)": "Bài thơ 'Bếp lửa' của Bằng Việt đã gợi lại những kỷ niệm đầy xúc động về tình bà cháu. Hình ảnh bếp lửa xuyên suốt bài thơ không chỉ là hình ảnh thực mộc mạc nơi quê nhà, mà còn là biểu tượng của tình yêu thương bao la, lòng kiên nhẫn và sức sống mãnh liệt của người bà trong những năm tháng kháng chiến gian khổ.",
-        "Soạn bài: Thương vợ (Trần Tế Xương)": "Tác phẩm 'Thương vợ' của Tú Xương là bài thơ chân thực và cảm động nhất trong kho tàng thơ Nôm của ông viết về người vợ. Bài thơ khắc họa sâu sắc hình ảnh bà Tú tần tảo, chịu thương chịu khó nuôi chồng nuôi con, qua đó thể hiện tấm lòng trân trọng, biết ơn và cả nỗi niềm tự trách của nhà thơ.",
-        "Phân tích nghệ thuật luận điểm trong Lặng lẽ Sa Pa": "Truyện ngắn 'Lặng lẽ Sa Pa' của Nguyễn Thành Long khẳng định vẻ đẹp của những con người lao động thầm lặng. Qua nghệ thuật xây dựng tình huống truyện tự nhiên và cách tổ chức hệ thống luận điểm phân tích tâm lý nhân vật ông họa sĩ, cô kỹ sư, tác giả đã làm nổi bật lý tưởng sống cống hiến quên mình vì tổ quốc.",
-        "Đề thi thử THPT Quốc Gia môn Ngữ Văn 2026": "ĐỀ THI GỒM 2 PHẦN CHÍNH:\n\nI. ĐỌC HIỂU (3.0 điểm): Đọc ngữ liệu ngoài sách giáo khoa và trả lời các câu hỏi phát hiện, thông hiểu.\n\nII. LÀM VĂN (7.0 điểm):\nCâu 1 (2.0 điểm): Viết đoạn văn nghị luận xã hội về ý nghĩa của ý chí vượt khó.\nCâu 2 (5.0 điểm): Nghị luận văn học phân tích giá trị nhân đạo trong một tác phẩm tự sự."
+        "Phân tích bài thơ Bếp lửa (Bằng Việt)": "Bài thơ 'Bếp lửa' của Bằng Việt đã gợi lại những kỷ niệm đầy xúc động về tình bà cháu...",
+        "Soạn bài: Thương vợ (Trần Tế Xương)": "Tác phẩm 'Thương vợ' của Tú Xương là bài thơ chân thực và cảm động nhất...",
+        "Phân tích nghệ thuật luận điểm trong Lặng lẽ Sa Pa": "Truyện ngắn 'Lặng lẽ Sa Pa' của Nguyễn Thành Long khẳng định vẻ đẹp của những con người lao động...",
+        "Đề thi thử THPT Quốc Gia môn Ngữ Văn 2026": "ĐỀ THI GỒM 2 PHẦN CHÍNH:\n\nI. ĐỌC HIỂU (3.0 điểm)...\n\nII. LÀM VĂN (7.0 điểm)..."
     };
 
     let dangSuaRow = null;
     let dangXemTieuDeKey = "";
 
-    // --- LOGIC ĐIỀU KHIỂN NÚT BA GẠCH ---
     function toggleBurgerMenu(event) {
-        event.stopPropagation(); // Chặn sự kiện nổi bọt để tránh đóng menu ngay lập tức
+        event.stopPropagation();
         const dropdown = document.getElementById('burgerDropdown');
         dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // Đổi phân quyền ngay lập tức khi click lựa chọn trong menu ba gạch
+    // --- CƠ CHẾ BẢO MẬT CHUYỂN ĐỔI QUYỀN ---
     function doiQuyen(quyen) {
         const body = document.getElementById('mainBody');
+        
         if(quyen === 'admin') {
-            body.className = 'role-admin';
-            alert("Đã chuyển sang giao diện ADMIN (Có quyền Thêm, Sửa, Xóa)");
+            // Nếu đang là User và muốn lên Admin, bắt buộc hỏi mã PIN
+            if(body.className !== 'role-admin') {
+                let nhapPin = prompt("Vui lòng nhập Mã PIN xác thực quyền Admin (Mã mặc định là 1234):");
+                if (nhapPin === ADMIN_SECURITY_PIN) {
+                    body.className = 'role-admin';
+                    alert("Mã PIN chính xác! Đã chuyển sang giao diện ADMIN (Có toàn quyền quản trị).");
+                } else {
+                    alert("Sai mã PIN! Hành động chuyển quyền bị từ chối.");
+                }
+            } else {
+                alert("Bạn đã ở vai trò Admin sẵn rồi.");
+            }
         } else {
             body.className = 'role-user';
-            alert("Đã chuyển sang giao diện USER KHÁCH (Chỉ có quyền Tìm kiếm và Xem nội dung)");
+            switchTab('document'); // Đẩy về tab tài liệu nếu đang ở tab quản lý user
+            alert("Đã chuyển sang giao diện USER KHÁCH (Bị ẩn các chức năng nâng cao).");
         }
         document.getElementById('burgerDropdown').style.display = 'none';
     }
 
-    // Tự động đóng menu ba gạch khi nhấn chuột ra vùng trống bên ngoài
     window.onclick = function() {
         document.getElementById('burgerDropdown').style.display = 'none';
     }
 
-    // --- CÁC HÀM XỬ LÝ POPUP XEM CHI TIẾT ---
+    // Điều hướng các khu vực quản lý (Tabs)
+    function switchTab(tabName) {
+        if(tabName === 'user-mgr') {
+            document.getElementById('documentSection').style.display = 'none';
+            document.getElementById('userManagementSection').style.display = 'block';
+        } else {
+            document.getElementById('documentSection').style.display = 'block';
+            document.getElementById('userManagementSection').style.display = 'none';
+        }
+    }
+
+    // --- QUẢN LÝ THÀNH VIÊN (USER MANAGEMENT) ---
+    function toggleUserModal(show) {
+        document.getElementById('userModal').style.display = show ? 'flex' : 'none';
+    }
+    function moModalUser() {
+        document.getElementById('userFormName').value = "";
+        document.getElementById('userFormEmail').value = "";
+        toggleUserModal(true);
+    }
+    function luuUserMoi() {
+        let name = document.getElementById('userFormName').value.trim();
+        let email = document.getElementById('userFormEmail').value.trim();
+        if(!name || !email) { alert("Vui lòng nhập đủ thông tin!"); return; }
+
+        let tableBody = document.querySelector('#userTable tbody');
+        let newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td></td>
+            <td>${name}</td>
+            <td>${email}</td>
+            <td><span class="badge" style="background-color: #e2e8f0; color: #4a5568;">Người Dùng</span></td>
+            <td class="action-links"><a class="btn-delete" onclick="xoaUser(this)">Xóa User</a></td>
+        `;
+        tableBody.appendChild(newRow);
+        capNhatSTTUser();
+        toggleUserModal(false);
+    }
+    function xoaUser(btn) {
+        if(confirm("Bạn chắc chắn muốn tước quyền truy cập và xóa user này?")) {
+            btn.parentElement.parentElement.remove();
+            capNhatSTTUser();
+        }
+    }
+    function capNhatSTTUser() {
+        let rows = document.querySelectorAll('#userTable tbody tr');
+        rows.forEach((row, i) => row.cells[0].innerText = i + 1);
+    }
+
+
+    // --- CÁC HÀM XỬ LÝ TÀI LIỆU (Giữ nguyên logic ứng dụng cũ của bạn) ---
     function xemChiTietKhiBamTen(cell) {
         dangXemTieuDeKey = cell.innerText.trim();
         let row = cell.parentElement;
@@ -375,14 +466,12 @@
 
         let noiDung = khoNoiDung[dangXemTieuDeKey] || "Nội dung chi tiết của tài liệu này hiện đang được cập nhật...";
         document.getElementById('viewNoiDung').innerText = noiDung;
-
         document.getElementById('viewModal').style.display = 'flex';
     }
 
     function kichHoatSuaNoiDung() {
         let noiDungHienTai = khoNoiDung[dangXemTieuDeKey] || "";
         document.getElementById('editNoiDungInput').value = noiDungHienTai;
-
         document.getElementById('viewNoiDung').style.display = 'none';
         document.getElementById('editNoiDungContainer').style.display = 'block';
         document.getElementById('btnInlineEdit').style.display = 'none';
@@ -391,28 +480,18 @@
 
     function luuNoiDungVuaSua() {
         let noiDungMoi = document.getElementById('editNoiDungInput').value;
-        
-        // ĐÃ SỬA: Thay thế hoàn toàn 'noiDoiMoi' thành 'noiDungMoi' đúng với khai báo biến ở trên
         khoNoiDung[dangXemTieuDeKey] = noiDungMoi;
         document.getElementById('viewNoiDung').innerText = noiDungMoi;
-
         document.getElementById('viewNoiDung').style.display = 'block';
         document.getElementById('editNoiDungContainer').style.display = 'none';
         document.getElementById('btnInlineEdit').style.display = 'inline-block';
         document.getElementById('btnInlineSave').style.display = 'none';
-        
         alert("Đã cập nhật nội dung văn bản chi tiết thành công!");
     }
 
-    function dongModalXem() {
-        document.getElementById('viewModal').style.display = 'none';
-    }
-
-    // --- CÁC HÀM XỬ LÝ POPUP THÊM/SỬA BẢNG ---
-    function toggleModal(show) {
-        document.getElementById('addModal').style.display = show ? 'flex' : 'none';
-    }
-
+    function dongModalXem() { document.getElementById('viewModal').style.display = 'none'; }
+    function toggleModal(show) { document.getElementById('addModal').style.display = show ? 'flex' : 'none'; }
+    
     function moModalThem() {
         dangSuaRow = null;
         document.getElementById('modalTitle').innerText = "Thêm Tài Liệu Mới";
@@ -424,7 +503,6 @@
 
     function suaHang(button) {
         dangSuaRow = button.parentElement.parentElement;
-        
         let tenHienTai = dangSuaRow.querySelector('.ten-tl').innerText.trim();
         let lopHienTai = dangSuaRow.getAttribute('data-lop');
         let loaiHienTai = dangSuaRow.querySelector('.badge').innerText.trim();
@@ -433,7 +511,6 @@
         document.getElementById('formTen').value = tenHienTai;
         document.getElementById('formLop').value = lopHienTai;
         document.getElementById('formLoai').value = loaiHienTai;
-
         toggleModal(true);
     }
 
@@ -442,10 +519,7 @@
         let lop = document.getElementById('formLop').value;
         let loai = document.getElementById('formLoai').value;
 
-        if (ten.trim() === "") {
-            alert("Vui lòng nhập tên tài liệu!");
-            return;
-        }
+        if (ten.trim() === "") { alert("Vui lòng nhập tên tài liệu!"); return; }
 
         let badgeClass = 'badge-vanmau';
         if(loai === 'Soạn Văn') badgeClass = 'badge-soanvan';
@@ -458,7 +532,6 @@
             let tableBody = document.querySelector('#taiLieuTable tbody');
             let newRow = document.createElement('tr');
             newRow.setAttribute('data-lop', lop);
-            
             newRow.innerHTML = `
                 <td></td>
                 <td class="ten-tl" onclick="xemChiTietKhiBamTen(this)"><strong>${ten}</strong></td>
@@ -478,69 +551,54 @@
                 khoNoiDung[ten] = khoNoiDung[cuTieuDe] || "";
                 delete khoNoiDung[cuTieuDe];
             }
-
             dangSuaRow.setAttribute('data-lop', lop);
             dangSuaRow.cells[1].innerHTML = `<strong>${ten}</strong>`;
             dangSuaRow.cells[2].innerText = `Lớp ${lop}`;
             dangSuaRow.cells[3].innerHTML = `<span class="badge ${badgeClass}">${loai}</span>`;
             dangSuaRow.cells[4].innerText = today;
         }
-
         capNhatSTT();
         toggleModal(false); 
     }
 
-    // --- CHỨC NĂNG LỌC & TÌM KIẾM ---
     function locTheoLop(lop) {
         let buttons = document.querySelectorAll('.class-btn');
         buttons.forEach(btn => btn.classList.remove('active'));
-        if(window.event && window.event.currentTarget) {
-            window.event.currentTarget.classList.add('active');
-        }
+        if(window.event && window.event.currentTarget) window.event.currentTarget.classList.add('active');
 
         let rows = document.querySelectorAll('#taiLieuTable tbody tr');
         rows.forEach(row => {
             let rowLop = row.getAttribute('data-lop');
-            if (lop === 'all' || rowLop === lop) {
-                row.classList.remove('hidden');
-            } else {
-                row.classList.add('hidden');
-            }
+            if (lop === 'all' || rowLop === lop) row.classList.remove('hidden');
+            else row.classList.add('hidden');
         });
     }
 
     function timKiemTaiLieu() {
         let input = document.getElementById('searchInput').value.toUpperCase();
         let rows = document.querySelectorAll('#taiLieuTable tbody tr');
-        
         rows.forEach(row => {
             let text = row.querySelector('.ten-tl').textContent || row.querySelector('.ten-tl').innerText;
-            if (text.toUpperCase().indexOf(input) > -1) {
-                row.classList.remove('hidden');
-            } else {
-                row.classList.add('hidden');
-            }
+            if (text.toUpperCase().indexOf(input) > -1) row.classList.remove('hidden');
+            else row.classList.add('hidden');
         });
     }
 
     function xoaHang(button) {
         if (confirm("Bạn có chắc chắn muốn xóa tài liệu này?")) {
-            let row = button.parentElement.parentElement;
-            row.remove();
+            button.parentElement.parentElement.remove();
             capNhatSTT();
         }
     }
 
     function capNhatSTT() {
         let rows = document.querySelectorAll('#taiLieuTable tbody tr');
-        rows.forEach((row, index) => {
-            row.cells[0].innerText = index + 1;
-        });
+        rows.forEach((row, index) => row.cells[0].innerText = index + 1);
     }
 
-    // Tự động đánh số thứ tự khi khởi chạy lần đầu
+    // Khởi chạy
     capNhatSTT();
+    capNhatSTTUser();
 </script>
-
 </body>
 </html>

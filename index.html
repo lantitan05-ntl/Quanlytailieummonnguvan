@@ -21,6 +21,13 @@
         header h1 { font-size: 28px; margin-bottom: 5px; }
         header p { font-size: 14px; opacity: 0.9; }
 
+        /* Trạng thái đăng nhập trên Header */
+        .login-status-info {
+            position: absolute; top: 20px; left: 25px;
+            font-size: 13px; background: rgba(255, 255, 255, 0.15);
+            padding: 6px 12px; border-radius: 20px; display: flex; align-items: center; gap: 8px;
+        }
+
         /* --- BURGER MENU --- */
         .menu-burger-container {
             position: absolute;
@@ -36,7 +43,7 @@
 
         .burger-dropdown {
             position: absolute; top: 50px; right: 0; background: white;
-            min-width: 180px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 200px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             padding: 8px 0; display: none; flex-direction: column; text-align: left;
         }
         .burger-dropdown a {
@@ -92,7 +99,7 @@
         .badge-dethi { background-color: #fff3e0; color: #e65100; }
 
         .action-links a { text-decoration: none; font-size: 14px; font-weight: 500; margin-right: 15px; cursor: pointer; }
-        .btn-edit { color: #f39c12; }
+        .btn-edit { color: #2a5298; }
         .btn-edit:hover { text-decoration: underline; }
         .btn-delete { color: #e74c3c; }
         .btn-delete:hover { text-decoration: underline; }
@@ -111,7 +118,8 @@
         .modal-box h2 { margin-bottom: 15px; color: #2a5298; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; margin-bottom: 5px; font-weight: bold; font-size: 14px; }
-        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; }
+        .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; outline: none;}
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: #2a5298; }
         .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
         .btn-cancel { background: #95a5a6; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
         .btn-save { background: #2a5298; color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; }
@@ -120,17 +128,20 @@
         .btn-inline-edit:hover { background-color: #d68910; }
     </style>
 </head>
-<body class="role-admin" id="mainBody">
-
-<div class="container">
+<body class="role-user" id="mainBody"> <div class="container">
     <header>
+        <div class="login-status-info" id="loginStatus">
+            <i class="fa-solid fa-user-lock"></i>
+            <span id="loginStatusText">Vai trò: Khách</span>
+        </div>
+
         <div class="menu-burger-container">
             <button class="burger-icon" onclick="toggleBurgerMenu(event)">
                 <i class="fa-solid fa-bars"></i>
             </button>
             <div class="burger-dropdown" id="burgerDropdown">
-                <a href="javascript:void(0)" onclick="doiQuyen('admin')"><i class="fa-solid fa-user-shield"></i> Quyền Admin</a>
-                <a href="javascript:void(0)" onclick="doiQuyen('user')"><i class="fa-solid fa-user"></i> Quyền Người dùng</a>
+                <a href="javascript:void(0)" id="menuLoginBtn" onclick="moModalLogin()"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập Admin</a>
+                <a href="javascript:void(0)" id="menuLogoutBtn" onclick="dangXuat()" class="admin-only"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
                 <div class="divider"></div>
                 <a href="javascript:void(0)" onclick="switchTab('document')"><i class="fa-solid fa-file-lines"></i> Kho Tài Liệu</a>
                 <a href="javascript:void(0)" onclick="switchTab('user-mgr')" class="admin-only"><i class="fa-solid fa-users-gear"></i> Quản Lý User</a>
@@ -185,8 +196,8 @@
                         <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
                         <td>04/06/2026</td>
                         <td class="action-links">
-                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-edit" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-delete admin-only" style="color: #f39c12;" onclick="suaHang(this)">Sửa</a>
                             <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
                         </td>
                     </tr>
@@ -197,8 +208,8 @@
                         <td><span class="badge badge-soanvan">Soạn Văn</span></td>
                         <td>03/06/2026</td>
                         <td class="action-links">
-                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-edit" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-delete admin-only" style="color: #f39c12;" onclick="suaHang(this)">Sửa</a>
                             <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
                         </td>
                     </tr>
@@ -209,8 +220,8 @@
                         <td><span class="badge badge-vanmau">Văn Mẫu</span></td>
                         <td>01/06/2026</td>
                         <td class="action-links">
-                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-edit" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-delete admin-only" style="color: #f39c12;" onclick="suaHang(this)">Sửa</a>
                             <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
                         </td>
                     </tr>
@@ -221,8 +232,8 @@
                         <td><span class="badge badge-dethi">Đề Thi</span></td>
                         <td>28/05/2026</td>
                         <td class="action-links">
-                            <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                            <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                            <a class="btn-edit" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                            <a class="btn-delete admin-only" style="color: #f39c12;" onclick="suaHang(this)">Sửa</a>
                             <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
                         </td>
                     </tr>
@@ -269,6 +280,24 @@
             </table>
         </div>
         <button class="class-btn" onclick="switchTab('document')">&larr; Quay lại Kho Tài Liệu</button>
+    </div>
+</div>
+
+<div class="modal-overlay" id="loginModal">
+    <div class="modal-box" style="width: 380px;">
+        <h2 style="text-align: center; margin-bottom: 20px;"><i class="fa-solid fa-user-shield"></i> Đăng Nhập Admin</h2>
+        <div class="form-group">
+            <label><i class="fa-solid fa-envelope"></i> Email hệ thống:</label>
+            <input type="email" id="loginEmail" placeholder="Nhập email quản trị..." required>
+        </div>
+        <div class="form-group">
+            <label><i class="fa-solid fa-lock"></i> Mật khẩu:</label>
+            <input type="password" id="loginPassword" placeholder="Nhập mật khẩu..." required>
+        </div>
+        <div class="form-actions" style="justify-content: space-between; margin-top: 25px;">
+            <button class="btn-cancel" onclick="toggleLoginModal(false)">Hủy bỏ</button>
+            <button class="btn-save" style="background: linear-gradient(135deg, #1e3c72, #2a5298);" onclick="thucHienDangNhap()">Đăng nhập</button>
+        </div>
     </div>
 </div>
 
@@ -350,8 +379,11 @@
 </div>
 
 <script>
-    // MÃ PIN bảo mật mặc định (Đã được cập nhật thành admin1234)
-    const ADMIN_SECURITY_PIN = "admin1234"; 
+    // --- THÔNG TIN TÀI KHOẢN ADMIN ĐƯỢC CẤU HÌNH ---
+    const ADMIN_CREDENTIALS = {
+        email: "lannguyenltn05@gmail.com",
+        password: "admin1234"
+    }; 
 
     const khoNoiDung = {
         "Phân tích bài thơ Bếp lửa (Bằng Việt)": "Bài thơ 'Bếp lửa' của Bằng Việt đã gợi lại những kỷ niệm đầy xúc động về tình bà cháu...",
@@ -369,27 +401,68 @@
         dropdown.style.display = (dropdown.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // --- CƠ CHẾ BẢO MẬT CHUYỂN ĐỔI QUYỀN ---
-    function doiQuyen(quyen) {
+    // --- CƠ CHẾ ĐĂNG NHẬP / ĐĂNG XUẤT MỚI ---
+    function toggleLoginModal(show) {
+        document.getElementById('loginModal').style.display = show ? 'flex' : 'none';
+        if(show) {
+            document.getElementById('loginEmail').value = "";
+            document.getElementById('loginPassword').value = "";
+        }
+    }
+
+    function moModalLogin() {
         const body = document.getElementById('mainBody');
-        
-        if(quyen === 'admin') {
-            // Nếu đang là User và muốn lên Admin, bắt buộc hỏi mã PIN
-            if(body.className !== 'role-admin') {
-                let nhapPin = prompt("Vui lòng nhập Mã PIN xác thực quyền Admin :");
-                if (nhapPin === ADMIN_SECURITY_PIN) {
-                    body.className = 'role-admin';
-                    alert("Mã PIN chính xác! Đã chuyển sang giao diện ADMIN (Có toàn quyền quản trị).");
-                } else {
-                    alert("Sai mã PIN! Hành động chuyển quyền bị từ chối.");
-                }
-            } else {
-                alert("Bạn đã ở vai trò Admin sẵn rồi.");
-            }
+        if(body.className === 'role-admin') {
+            alert("Bạn đang ở vai trò Admin sẵn rồi.");
+            document.getElementById('burgerDropdown').style.display = 'none';
+            return;
+        }
+        toggleLoginModal(true);
+    }
+
+    function thucHienDangNhap() {
+        let emailInput = document.getElementById('loginEmail').value.trim();
+        let passwordInput = document.getElementById('loginPassword').value;
+
+        if(!emailInput || !passwordInput) {
+            alert("Vui lòng điền đầy đủ Email và Mật khẩu!");
+            return;
+        }
+
+        // Kiểm tra thông tin tài khoản quản trị
+        if(emailInput === ADMIN_CREDENTIALS.email && passwordInput === ADMIN_CREDENTIALS.password) {
+            const body = document.getElementById('mainBody');
+            body.className = 'role-admin'; // Chuyển giao diện sang Admin
+            
+            // Cập nhật trạng thái hiển thị thông tin tài khoản trên header
+            document.getElementById('loginStatusText').innerText = `Admin: Nguyễn Thị Lan`;
+            document.getElementById('loginStatus').style.background = "rgba(231, 76, 60, 0.3)";
+            
+            // Ẩn nút đăng nhập trên menu, hiện nút đăng xuất
+            document.getElementById('menuLoginBtn').style.display = 'none';
+            
+            alert("Đăng nhập thành công! Đã kích hoạt toàn quyền quản trị.");
+            toggleLoginModal(false);
         } else {
-            body.className = 'role-user';
+            alert("Email hoặc Mật khẩu quản trị không chính xác!");
+        }
+        document.getElementById('burgerDropdown').style.display = 'none';
+    }
+
+    function dangXuat() {
+        if(confirm("Bạn có chắc chắn muốn đăng xuất khỏi quyền Admin?")) {
+            const body = document.getElementById('mainBody');
+            body.className = 'role-user'; // Quay lại giao diện khách
+            
+            // Trả trạng thái thông tin tài khoản về ban đầu
+            document.getElementById('loginStatusText').innerText = "Vai trò: Khách";
+            document.getElementById('loginStatus').style.background = "rgba(255, 255, 255, 0.15)";
+            
+            // Hiện lại tùy chọn đăng nhập trên menu
+            document.getElementById('menuLoginBtn').style.display = 'flex';
+            
             switchTab('document'); // Đẩy về tab tài liệu nếu đang ở tab quản lý user
-            alert("Đã chuyển sang giao diện USER KHÁCH (Bị ẩn các chức năng nâng cao).");
+            alert("Đã đăng xuất! Chuyển về giao diện khách.");
         }
         document.getElementById('burgerDropdown').style.display = 'none';
     }
@@ -539,8 +612,8 @@
                 <td><span class="badge ${badgeClass}">${loai}</span></td>
                 <td>${today}</td>
                 <td class="action-links">
-                    <a class="btn-edit" style="color: #2a5298;" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
-                    <a class="btn-edit admin-only" onclick="suaHang(this)">Sửa</a>
+                    <a class="btn-edit" onclick="xemChiTietKhiBamTen(this.parentElement.parentElement.cells[1])">Xem</a>
+                    <a class="btn-delete admin-only" style="color: #f39c12;" onclick="suaHang(this)">Sửa</a>
                     <a class="btn-delete admin-only" onclick="xoaHang(this)">Xóa</a>
                 </td>
             `;

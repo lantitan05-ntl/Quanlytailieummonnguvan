@@ -314,7 +314,7 @@
         </div>
 
         <div id="editNoiDungContainer" style="display: none;">
-            <textarea id="editNoiDungInput" rows="10" style="width: 100%; line-height: 1.6; padding: 10px; font-size: 14px; resize: vertical; outline: none; border-color: #2a5298;"></textarea>
+            <textarea id="editNoiDungInput" rows="10" style="width: 100%; line-height: 1.6; padding: 10px; font-size: 14px; resize: vertical; outline: none; border-color: #2a5298行业;"></textarea>
         </div>
 
         <div class="form-actions" style="margin-top: 20px; justify-content: space-between;">
@@ -381,7 +381,7 @@
 <script>
     // --- THÔNG TIN TÀI KHOẢN ADMIN ĐƯỢC CẤU HÌNH ---
     const ADMIN_CREDENTIALS = {
-        email: "lannguyenltn05@gmail.com",
+        email: "admin1234@gmail.com",
         password: "admin1234"
     }; 
 
@@ -630,48 +630,69 @@
             dangSuaRow.cells[3].innerHTML = `<span class="badge ${badgeClass}">${loai}</span>`;
             dangSuaRow.cells[4].innerText = today;
         }
-        capNhatSTT();
-        toggleModal(false); 
-    }
-
-    function locTheoLop(lop) {
-        let buttons = document.querySelectorAll('.class-btn');
-        buttons.forEach(btn => btn.classList.remove('active'));
-        if(window.event && window.event.currentTarget) window.event.currentTarget.classList.add('active');
-
+        
+        // Cập nhật lại số thứ tự cột STT cho bảng tài liệu
         let rows = document.querySelectorAll('#taiLieuTable tbody tr');
-        rows.forEach(row => {
-            let rowLop = row.getAttribute('data-lop');
-            if (lop === 'all' || rowLop === lop) row.classList.remove('hidden');
-            else row.classList.add('hidden');
-        });
-    }
+        rows.forEach((row, i) => row.cells[0].innerText = i + 1);
 
-    function timKiemTaiLieu() {
-        let input = document.getElementById('searchInput').value.toUpperCase();
-        let rows = document.querySelectorAll('#taiLieuTable tbody tr');
-        rows.forEach(row => {
-            let text = row.querySelector('.ten-tl').textContent || row.querySelector('.ten-tl').innerText;
-            if (text.toUpperCase().indexOf(input) > -1) row.classList.remove('hidden');
-            else row.classList.add('hidden');
-        });
+        toggleModal(false);
     }
 
     function xoaHang(button) {
         if (confirm("Bạn có chắc chắn muốn xóa tài liệu này?")) {
-            button.parentElement.parentElement.remove();
-            capNhatSTT();
+            let row = button.parentElement.parentElement;
+            let tieuDe = row.querySelector('.ten-tl').innerText.trim();
+            delete khoNoiDung[tieuDe];
+            row.remove();
+            
+            let rows = document.querySelectorAll('#taiLieuTable tbody tr');
+            rows.forEach((row, i) => row.cells[0].innerText = i + 1);
         }
     }
 
-    function capNhatSTT() {
-        let rows = document.querySelectorAll('#taiLieuTable tbody tr');
-        rows.forEach((row, index) => row.cells[0].innerText = index + 1);
+    function timKiemTaiLieu() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let rows = document.querySelectorAll("#taiLieuTable tbody tr");
+
+        rows.forEach(row => {
+            let tenTL = row.cells[1].innerText.toLowerCase();
+            if (tenTL.includes(input)) {
+                row.classList.remove("hidden");
+            } else {
+                row.classList.add("hidden");
+            }
+        });
     }
 
-    // Khởi chạy
-    capNhatSTT();
-    capNhatSTTUser();
+    function locTheoLop(lop) {
+        let buttons = document.querySelectorAll(".class-btn");
+        buttons.forEach(btn => btn.classList.remove("active"));
+        
+        // Tìm đúng button được click dựa trên thuộc tính onclick
+        buttons.forEach(btn => {
+            if(btn.getAttribute('onclick').includes(`'${lop}'`)) {
+                btn.classList.add("active");
+            }
+        });
+
+        let rows = document.querySelectorAll("#taiLieuTable tbody tr");
+        rows.forEach(row => {
+            if (lop === "all" || row.getAttribute("data-lop") === lop) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+    
+    // Tự động đánh số thứ tự ban đầu khi tải trang
+    window.onload = function() {
+        let docRows = document.querySelectorAll('#taiLieuTable tbody tr');
+        docRows.forEach((row, i) => row.cells[0].innerText = i + 1);
+        
+        let userRows = document.querySelectorAll('#userTable tbody tr');
+        userRows.forEach((row, i) => row.cells[0].innerText = i + 1);
+    };
 </script>
 </body>
 </html>
